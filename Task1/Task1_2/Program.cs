@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Linq;
 using System.Text;
+using Microsoft.VisualBasic;
 
 namespace Task1_2
 {
     class Program
     {
-        //Task 1
-        static string DoubleLetters(string s1, string s2) =>
-            string.Concat(s1.Select(c => c.ToString() + (s2.Contains(c) ? c : "")));
-
-        //Task 2 не округляем
+        //Task 1 не округляем
         static double GetAverageWordLength(string s) =>
             s.Where(c => !char.IsPunctuation(c))
                 .Aggregate(new StringBuilder(),
@@ -19,7 +16,12 @@ namespace Task1_2
                 .Select(word => word.Length)
                 .Average();
 
-        //Task 3
+
+        //Task 2
+        static string DoubleLetters(string s1, string s2) =>
+            string.Concat(s1.Select(c => c.ToString() + (s2.Contains(c) ? c : "")));
+
+        //Task 3 (поскольку между словами все равно есть пробелы и их не надо выводить, я не делаю сплит по символам)
         static int CountLowercaseFirstLetters(string s) =>
             s.Split(' ', StringSplitOptions.RemoveEmptyEntries).Count(s => char.IsLower(s[0]));
 
@@ -43,6 +45,7 @@ namespace Task1_2
                     nextUpper = true;
                 }
 
+                char[] a;
                 result.Append(c);
             }
 
