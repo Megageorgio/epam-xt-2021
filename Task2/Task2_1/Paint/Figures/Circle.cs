@@ -2,7 +2,7 @@
 
 namespace Paint
 {
-    public record Circle (Point Center, int Radius) : IFigure
+    public record Circle(Point Center, int Radius) : IFigure
     {
         string IFigure.FigureName => "Окружность";
         public double Length => 2 * Math.PI * Radius;

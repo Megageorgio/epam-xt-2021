@@ -4,4 +4,10 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="MegaString.cs~RF127a5ba.TMP\**" />
+    <EmbeddedResource Remove="MegaString.cs~RF127a5ba.TMP\**" />
+    <None Remove="MegaString.cs~RF127a5ba.TMP\**" />
+  </ItemGroup>
+
 </Project>

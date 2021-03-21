@@ -2,7 +2,7 @@
 
 namespace Paint
 {
-    public record Square (Point A, Point B, Point C, Point D) : Rectangle(A, B, C, D), IFigure
+    public record Square(Point A, Point B, Point C, Point D) : Rectangle(A, B, C, D), IFigure
     {
         string IFigure.FigureName => "Квадрат";
 

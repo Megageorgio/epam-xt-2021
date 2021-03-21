@@ -2,7 +2,7 @@
 
 namespace Paint
 {
-    public record Line (Point Start, Point End) : IFigure
+    public record Line(Point Start, Point End) : IFigure
     {
         string IFigure.FigureName => "Линия";
 

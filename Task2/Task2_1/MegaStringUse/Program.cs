@@ -12,8 +12,8 @@ namespace MegaStringUse
             {
                 Console.WriteLine(c);
             }
-            Console.WriteLine(s.RemoveDoubles());
 
+            Console.WriteLine(s.RemoveDoubles());
         }
     }
 }
