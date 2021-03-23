@@ -46,8 +46,8 @@ namespace Task2_2
         {
             switch (target)
             {
-                case IPlayer:
-                    (target as IPlayer)?.Damage(Power);
+                case IPlayer player:
+                    player.Damage(Power);
                     return false;
                 default:
                     return false;

@@ -66,11 +66,11 @@ namespace Task2_2
             {
                 case IEffect:
                     return true;
-                case IBonus:
-                    (target as IBonus).Pick(this);
+                case IBonus bonus:
+                    bonus.Pick(this);
                     return true;
-                case IAttackable:
-                    if ((target as IAttackable).Damage(1))
+                case IAttackable attackable:
+                    if (attackable.Damage(1))
                     {
                         return OnCollision(Board[target.X, target.Y]);
                     }
