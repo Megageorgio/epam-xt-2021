@@ -51,8 +51,12 @@ namespace Paint
                     Console.WriteLine("Все фигуры удалены!");
                     break;
                 case 4:
-                    Console.WriteLine("Введите имя:");
-                    username = Console.ReadLine();
+                    do
+                    {
+                        Console.WriteLine("Введите имя:");
+                        username = Console.ReadLine();
+                    } while (username == string.Empty);
+
                     Console.WriteLine("Имя изменено!");
                     if (!Figures.ContainsKey(username))
                     {
@@ -81,7 +85,8 @@ namespace Paint
                 Console.WriteLine(username + ", выберите нужную фигуру:" + Environment.NewLine +
                                   string.Join(Environment.NewLine,
                                       figureNames.Select((name, i) => $"{i + 1}. {name}")));
-                if (!int.TryParse(Console.ReadLine(), out var opt))
+                if (!int.TryParse(Console.ReadLine(), out var opt) ||
+                    opt <= 0 || opt > figureNames.Length)
                 {
                     continue;
                 }
