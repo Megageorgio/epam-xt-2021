@@ -2,9 +2,9 @@
 
 namespace Paint
 {
-    public record Tetragon(Point A, Point B, Point C, Point D) : Polygon(A, B, C, D), IFigure
+    public record Tetragon(Point A, Point B, Point C, Point D) : Polygon(A, B, C, D)
     {
-        string IFigure.FigureName => "Четырехугольник";
+        public override string FigureName => "Четырехугольник";
 
         public override string ToString() => base.ToString();
     }

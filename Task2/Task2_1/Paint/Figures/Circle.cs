@@ -2,15 +2,16 @@
 
 namespace Paint
 {
-    public record Circle(Point Center, int Radius) : IFigure
+    public record Circle(Point Center, int Radius) : Figure
     {
-        string IFigure.FigureName => "Окружность";
+        public override string FigureName => "Окружность";
         public double Length => 2 * Math.PI * Radius;
 
-        public override string ToString() =>
-            ((IFigure) this).FigureName + Environment.NewLine +
-            $"Центр: {Center}" + Environment.NewLine +
-            $"Радиус: {Radius}" + Environment.NewLine +
-            $"Длина: {Length}";
+        public override string ToString() => FormatOutput(
+            base.ToString(),
+            "Центр: " + Center,
+            "Радиус: " + Radius,
+            "Длина: " + Length
+        );
     }
 }

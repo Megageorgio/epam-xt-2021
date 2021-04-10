@@ -2,9 +2,9 @@
 
 namespace Paint
 {
-    public record Ring(Point Center, Circle Start, Circle End) : IFigure
+    public record Ring(Point Center, Circle Start, Circle End) : Figure
     {
-        string IFigure.FigureName => "Кольцо";
+        public override string FigureName => "Кольцо";
 
         public double Area => Math.PI * Math.Abs(End.Radius * End.Radius - Start.Radius * Start.Radius);
 
@@ -15,12 +15,12 @@ namespace Paint
         {
         }
 
-        public override string ToString() =>
-            ((IFigure) this).FigureName + Environment.NewLine +
-            $"Центр: {Center}" + Environment.NewLine +
-            $"Радиус первой окружности: {Start.Radius}" + Environment.NewLine +
-            $"Радиус второй окружности: {End.Radius}" + Environment.NewLine +
-            $"Суммарная длина окружностей: {Length}" + Environment.NewLine +
-            $"Площадь: {Area}";
+        public override string ToString() => FormatOutput(
+            base.ToString(),
+            "Центр: " + Center,
+            "Радиус первой окружности: " + Start.Radius,
+            "Радиус второй окружности: " + End.Radius,
+            "Суммарная длина окружностей: " + Length,
+            "Площадь: " + Area);
     }
 }

@@ -2,9 +2,9 @@
 
 namespace Paint
 {
-    public record Triangle(Point A, Point B, Point C) : Polygon(A, B, C), IFigure
+    public record Triangle(Point A, Point B, Point C) : Polygon(A, B, C)
     {
-        string IFigure.FigureName => "Треугольник";
+        public override string FigureName => "Треугольник";
 
         public override string ToString() => base.ToString();
     }

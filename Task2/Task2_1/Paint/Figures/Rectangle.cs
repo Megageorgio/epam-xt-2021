@@ -2,9 +2,9 @@
 
 namespace Paint
 {
-    public record Rectangle(Point A, Point B, Point C, Point D) : Tetragon(A, B, C, D), IFigure
+    public record Rectangle(Point A, Point B, Point C, Point D) : Tetragon(A, B, C, D)
     {
-        string IFigure.FigureName => "Прямоугольник";
+        public override string FigureName => "Прямоугольник";
 
         public override double Area => GetSideLength(A, B) * GetSideLength(C, D);
 

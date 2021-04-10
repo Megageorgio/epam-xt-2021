@@ -12,9 +12,9 @@ namespace Paint
 
         public void Run()
         {
-            while (true)
+            var opt = 4;
+            do
             {
-                var opt = 4;
                 if (username != null)
                 {
                     Console.WriteLine(username + ", выберите действие:" + Environment.NewLine +
@@ -23,38 +23,48 @@ namespace Paint
                                       "3. Очистить холст" + Environment.NewLine +
                                       "4. Сменить пользователя" + Environment.NewLine +
                                       "5. Выход");
-                    opt = int.Parse(Console.ReadLine());
+                    if (!int.TryParse(Console.ReadLine(), out opt))
+                    {
+                        continue;
+                    }
                 }
+            } while (HandleMainMenuInput(opt));
+        }
 
-                switch (opt)
-                {
-                    case 1:
-                        Figures[username].Add(GetFigureFromInput());
-                        Console.WriteLine("Фигура добавлена");
-                        break;
-                    case 2:
-                        Console.WriteLine("Список фигур:");
-                        Console.WriteLine(string.Join(Environment.NewLine + new string('-', 20) + Environment.NewLine,
+        private bool HandleMainMenuInput(int opt)
+        {
+            switch (opt)
+            {
+                case 1:
+                    Figures[username].Add(GetFigureFromInput());
+                    Console.WriteLine("Фигура добавлена");
+                    break;
+                case 2:
+                    Console.WriteLine("Список фигур:");
+                    Console.WriteLine(Figures[username].Count == 0
+                        ? "Фигуры осутствуют"
+                        : string.Join(Environment.NewLine + new string('-', 20) + Environment.NewLine,
                             Figures[username]));
-                        break;
-                    case 3:
-                        Figures[username].Clear();
-                        Console.WriteLine("Все фигуры удалены!");
-                        break;
-                    case 4:
-                        Console.WriteLine("Введите имя:");
-                        username = Console.ReadLine();
-                        Console.WriteLine("Имя изменено!");
-                        if (!Figures.ContainsKey(username))
-                        {
-                            Figures.Add(username, new List<IFigure>());
-                        }
+                    break;
+                case 3:
+                    Figures[username].Clear();
+                    Console.WriteLine("Все фигуры удалены!");
+                    break;
+                case 4:
+                    Console.WriteLine("Введите имя:");
+                    username = Console.ReadLine();
+                    Console.WriteLine("Имя изменено!");
+                    if (!Figures.ContainsKey(username))
+                    {
+                        Figures.Add(username, new List<IFigure>());
+                    }
 
-                        break;
-                    case 5:
-                        return;
-                }
+                    break;
+                case 5:
+                    return false;
             }
+
+            return true;
         }
 
         private IFigure GetFigureFromInput()
@@ -66,66 +76,73 @@ namespace Paint
                 "Линия", "Многоугольник", "Четырехугольник", "Прямоугольник", "Квадрат", "Треугольник", "Окружность",
                 "Круг", "Кольцо"
             };
-            Console.WriteLine(username + ", выберите нужную фигуру:" + Environment.NewLine +
-                              string.Join(Environment.NewLine, figureNames.Select((name, i) => $"{i + 1}. {name}")));
-            var opt = int.Parse(Console.ReadLine());
-            Console.WriteLine($"Введите параметры фигуры {figureNames[opt - 1]}:");
-            IFigure figure;
+            while (true)
+            {
+                Console.WriteLine(username + ", выберите нужную фигуру:" + Environment.NewLine +
+                                  string.Join(Environment.NewLine,
+                                      figureNames.Select((name, i) => $"{i + 1}. {name}")));
+                if (!int.TryParse(Console.ReadLine(), out var opt))
+                {
+                    continue;
+                }
+
+                Console.WriteLine($"Введите параметры фигуры {figureNames[opt - 1]}:");
+                var figure = HandleFigureMenuInput(opt);
+                if (figure == null)
+                {
+                    continue;
+                }
+
+                Console.WriteLine($"Фигура {figureNames[opt - 1]} создана!");
+                return figure;
+            }
+        }
+
+        private IFigure HandleFigureMenuInput(int opt)
+        {
             switch (opt)
             {
                 case 1:
                     var linePoints = GetPointsFromInput(2);
-                    figure = new Line(linePoints[0], linePoints[1]);
-                    break;
+                    return new Line(linePoints[0], linePoints[1]);
                 case 2:
                     Console.WriteLine("Введите количество точек:");
                     var polygonPointsCount = int.Parse(Console.ReadLine());
                     var polygonPoints = GetPointsFromInput(polygonPointsCount);
-                    figure = new Polygon(polygonPoints);
-                    break;
+                    return new Polygon(polygonPoints);
                 case 3:
                     var tetragonPoints = GetPointsFromInput(4);
-                    figure = new Tetragon(tetragonPoints[0], tetragonPoints[1], tetragonPoints[2], tetragonPoints[3]);
-                    break;
+                    return new Tetragon(tetragonPoints[0], tetragonPoints[1], tetragonPoints[2], tetragonPoints[3]);
                 case 4:
                     var rectanglePoints = GetPointsFromInput(4);
-                    figure = new Rectangle(rectanglePoints[0], rectanglePoints[1], rectanglePoints[2],
+                    return new Rectangle(rectanglePoints[0], rectanglePoints[1], rectanglePoints[2],
                         rectanglePoints[3]);
-                    break;
                 case 5:
                     var squarePoints = GetPointsFromInput(4);
-                    figure = new Square(squarePoints[0], squarePoints[1], squarePoints[2], squarePoints[3]);
-                    break;
+                    return new Square(squarePoints[0], squarePoints[1], squarePoints[2], squarePoints[3]);
                 case 6:
                     var trianglePoints = GetPointsFromInput(3);
-                    figure = new Triangle(trianglePoints[0], trianglePoints[1], trianglePoints[2]);
-                    break;
+                    return new Triangle(trianglePoints[0], trianglePoints[1], trianglePoints[2]);
                 case 7:
                     var circleCenter = GetPointFromInput();
                     Console.WriteLine("Введите радиус:");
                     var circleRadius = int.Parse(Console.ReadLine());
-                    figure = new Circle(circleCenter, circleRadius);
-                    break;
+                    return new Circle(circleCenter, circleRadius);
                 case 8:
                     var diskCenter = GetPointFromInput();
                     Console.WriteLine("Введите радиус:");
                     var diskRadius = int.Parse(Console.ReadLine());
-                    figure = new Disk(diskCenter, diskRadius);
-                    break;
+                    return new Disk(diskCenter, diskRadius);
                 case 9:
                     var ringCenter = GetPointFromInput();
                     Console.WriteLine("Введите радиус первой окружности:");
                     var ringStartRadius = int.Parse(Console.ReadLine());
                     Console.WriteLine("Введите радиус второй окружности:");
                     var ringEndRadius = int.Parse(Console.ReadLine());
-                    figure = new Ring(ringCenter, ringStartRadius, ringEndRadius);
-                    break;
-                default:
-                    return GetFigureFromInput();
+                    return new Ring(ringCenter, ringStartRadius, ringEndRadius);
             }
 
-            Console.WriteLine($"Фигура {figureNames[opt - 1]} создана!");
-            return figure;
+            return null;
         }
 
         private Point GetPointFromInput()
