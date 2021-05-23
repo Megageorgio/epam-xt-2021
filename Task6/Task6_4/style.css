@@ -1,0 +1,42 @@
+body {
+  background-color: #4c5c74;
+}
+
+.cards {
+  width: 700px;
+  display: table;
+  background-color: white;
+  margin: 40px auto;
+  padding: 10px 0;
+  border-radius: 5px;
+  box-shadow: 0 10px 30px 4px #00000080;
+}
+
+.cards:last-child {
+  border: none;
+}
+
+.card {
+  display: table-cell;
+  text-align: center;
+  font-family: 'PT Sans', sans-serif;
+  border-right: 1px solid lightgray;
+}
+
+.card h4 {
+  color: #f56332;
+}
+
+.card button {
+  font-family: 'PT Sans', sans-serif;
+  color: white;
+  background-color: #f56332;
+  border: none;
+  border-radius: 2px;
+  padding: 5px 10px;
+}
+
+.card img {
+  height: 64px;
+  margin: 0 auto;
+}

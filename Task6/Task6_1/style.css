@@ -1,0 +1,11 @@
+.menu {
+    width: 200px;
+    padding: 8px;
+    background-color: #f9e598;
+    box-shadow: 6px 6px maroon;
+    line-height: 1.5;
+    color: brown;
+    border: 1px solid black;
+    border-radius: 9px;
+    list-style-type: none;
+}

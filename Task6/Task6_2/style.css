@@ -1,0 +1,45 @@
+hr {
+    border: none;
+    color: white;
+    background-color: white;
+    height: 1px;
+}
+
+.register {
+    width: 380px;
+    background-color: #0690cf;
+    border: 3px solid #0075b2;
+    font: 16px sans-serif;
+    color: white;
+}
+
+.register h2 {
+    margin: 20px 0 10px 20px;
+    font-weight: normal;
+}
+
+.register form {
+    margin: 30px 0 20px 20px;
+}
+
+.register .email {
+    margin-bottom: 20px;
+    width: 300px;
+}
+
+.register .pass {
+    margin-bottom: 30px;
+    margin-right: 17px;
+    width: 135px;
+}
+
+.register label {
+    display: inline-block;
+}
+
+.register .submit {
+    background: #ffdc7c;
+    width: 80px;
+    height: 25px;
+    border: 0;
+}
